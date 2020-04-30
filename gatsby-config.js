@@ -7,6 +7,7 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    siteUrl: process.env.SITE_URL,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -32,20 +33,18 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-wordpress",
+      resolve: `gatsby-source-wordpress`,
       options: {
-        // I have created a dummy site for us to use with the plugins we discussed
-        baseUrl: process.env.SOURCE_URL,
-        protocol: "https",
+        baseUrl: process.env.API_URL,
+        protocol: process.env.API_PROTOCOL,
         hostingWPCOM: false,
-        // We will be using some advanced custom fields
         useACF: true,
         acfOptionPageIds: [],
         verboseOutput: false,
         perPage: 100,
         searchAndReplaceContentUrls: {
           sourceUrl: process.env.SOURCE_URL,
-          replacementUrl: "https://localhost:8000",
+          replacementUrl: process.env.REPLACEMENT_URL,
         },
         // Set how many simultaneous requests are sent at once.
         concurrentRequests: 10,
